@@ -1,5 +1,6 @@
 import {
   Button,
+  Kbd,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -106,9 +107,12 @@ export const CreateFlashcardModal = ({ isOpen, onClose, onOpen }) => {
   const { colorMode } = useColorMode();
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} size="full">
       <ModalOverlay>
-        <ModalContent data-testid="create-flashcard-modal" marginTop="8em">
+        <ModalContent
+          data-testid="create-flashcard-modal"
+          margin="8em 2em 0 2em"
+        >
           <ModalHeader
             fontWeight="normal"
             fontSize={theme.fontSizes['xl0']}
@@ -142,6 +146,7 @@ export const CreateFlashcardModal = ({ isOpen, onClose, onOpen }) => {
                 className="answer-text"
                 name="answer"
                 testId="create-flashcard-modal-answer"
+                size="xl"
                 label={intl.formatMessage({ id: 'forms.answer.label' })}
                 errors={errors}
                 placeholder={intl.formatMessage({
@@ -169,8 +174,13 @@ export const CreateFlashcardModal = ({ isOpen, onClose, onOpen }) => {
                 data-testid="create-flashcard-modal-submit"
                 isDisabled={isSubmitting}
                 width="100%"
+                colorScheme="teal"
               >
                 Create Flashcard
+                &nbsp;
+                <Kbd border="1px solid #bbb" color="black">Shift</Kbd>
+                &nbsp;+ &nbsp;
+                <Kbd border="1px solid #bbb" color="black">Enter</Kbd>
               </Button>
             </ModalFooter>
           </form>
