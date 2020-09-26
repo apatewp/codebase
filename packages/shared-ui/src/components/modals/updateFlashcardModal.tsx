@@ -18,6 +18,7 @@ import {
   useUpdateFlashcardByIdMutation,
 } from '../../utils/api';
 
+import { SubmissionInProgress } from '../submission-in-progress';
 import { colors } from '../../themes/neonLaw';
 import { flashcardTopics } from '../../forms/options/flashcardTopics';
 import { submitOnShiftEnter } from '../../utils/keyboard';
@@ -38,9 +39,12 @@ export const UpdateFlashcardModal = ({
   const intl = useIntl();
   const { answer, id, prompt, topic } = currentRow?.values || {};
 
-  const [updateFlashcard] = useUpdateFlashcardByIdMutation();
+  const [updateFlashcard, { loading }] = useUpdateFlashcardByIdMutation();
 
-  const [deleteFlashcardMutation] = useDeleteFlashcardByIdMutation({
+  const [
+    deleteFlashcardMutation,
+    { loading: deleteInProgress },
+  ] = useDeleteFlashcardByIdMutation({
     update(cache) {
       cache.modify({
         fields: {
@@ -201,7 +205,9 @@ export const UpdateFlashcardModal = ({
               <Button
                 type="submit"
                 data-testid="update-flashcard-modal-submit"
-                isDisabled={isSubmitting || isDeleting}
+                isDisabled={
+                  isSubmitting || isDeleting || loading || deleteInProgress
+                }
                 width="100%"
                 margin="0 1em"
                 colorScheme="teal"
@@ -214,10 +220,13 @@ export const UpdateFlashcardModal = ({
                 <Kbd border="1px solid #bbb" color="black">
                   Enter
                 </Kbd>
+                <SubmissionInProgress loading={loading} />
               </Button>
               <Button
                 data-testid="update-flashcard-modal-delete-button"
-                isDisabled={isSubmitting || isDeleting}
+                isDisabled={
+                  isSubmitting || isDeleting || loading || deleteInProgress
+                }
                 margin="0 1em"
                 onClick={async () => {
                   setIsDeleting(true);
@@ -230,6 +239,7 @@ export const UpdateFlashcardModal = ({
                 <Kbd border="1px solid #bbb" color="black">
                   D
                 </Kbd>
+                <SubmissionInProgress loading={deleteInProgress} />
               </Button>
             </ModalFooter>
           </form>
