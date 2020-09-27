@@ -1,3 +1,5 @@
+require('newrelic');
+
 import 'dotenv/config';
 
 import cors from 'cors';
