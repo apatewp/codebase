@@ -76,7 +76,7 @@ resource "kubernetes_deployment" "api" {
           }
           env {
             name  = "NEW_RELIC_APP_NAME"
-            value = var.app_name
+            value = var.new_relic_app_name
           }
 
           volume_mount {
