@@ -14,14 +14,15 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 import { StringInput, Textarea } from '../../forms/base';
 import { colors, gutters } from '../../themes/neonLaw';
+import { submitOnMetaEnter, submitOnShiftEnter } from '../../utils/keyboard';
 
 import { SubmissionInProgress } from '../submission-in-progress';
 import { gql } from '@apollo/client';
-import { submitOnShiftEnter } from '../../utils/keyboard';
 import { useCreateFlashcardMutation } from '../../utils/api';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'gatsby-plugin-intl';
 import { useKeyPressed } from '../../utils/useKeyPressed';
+import { useOS } from '../../utils/useOS';
 
 export const CreateFlashcardModal = ({ isOpen, onClose, onOpen }) => {
   const intl = useIntl();
@@ -54,6 +55,8 @@ export const CreateFlashcardModal = ({ isOpen, onClose, onOpen }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
+
+  const OS = useOS();
   const isCPressed = useKeyPressed((e: KeyboardEvent) => e.key === 'c');
 
   const onSubmit = async ({ answer, prompt }) => {
@@ -73,7 +76,11 @@ export const CreateFlashcardModal = ({ isOpen, onClose, onOpen }) => {
   };
 
   const keyDownHandler = (e: any) => {
-    submitOnShiftEnter(e, formRef);
+    if (OS === 'Mac OS') {
+      submitOnMetaEnter(e, formRef);
+    } else {
+      submitOnShiftEnter(e, formRef);
+    }
   };
 
   useEffect(() => {
