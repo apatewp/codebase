@@ -2,7 +2,8 @@
 // @ts-nocheck
 /* eslint-enable */
 import { Box, Button, Text, useColorMode } from '@chakra-ui/core';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+
 import ReactDiffViewer from 'react-diff-viewer';
 import { Textarea } from '../forms/base';
 import { isShiftEnterPressed } from '../utils/keyboard';
@@ -12,17 +13,17 @@ interface FlashcardProps {
   answer: string;
   showAnswer: boolean;
   toggleShowAnswer: any;
+  setIsTextAreaFocused: any;
 }
 
 export const Flashcard = ({
   prompt,
   answer,
   showAnswer,
-  toggleShowAnswer
+  toggleShowAnswer,
+  setIsTextAreaFocused,
 }: FlashcardProps) => {
   const { colorMode } = useColorMode();
-
-  const textAreaRef = useRef(null);
 
   const [userAnswer, changeUserAnswer] = useState('');
 
@@ -34,13 +35,16 @@ export const Flashcard = ({
             {prompt}
           </Text>
           <Textarea
-            ref={textAreaRef}
+            className="flascard-textarea"
             onKeyDown={(e: React.KeyboardEvent) => {
               if (isShiftEnterPressed(e)) {
                 e.preventDefault();
                 toggleShowAnswer(true);
                 setTimeout(() => {
-                  document.querySelector('.show-prompt').focus();
+                  const showPromptButton = document.querySelector(
+                    '.show-prompt',
+                  );
+                  showPromptButton.focus();
                 }, 10);
               }
             }}
@@ -49,11 +53,17 @@ export const Flashcard = ({
             onChange={(event) => {
               changeUserAnswer(event.target.value);
             }}
+            onFocus={() => {
+              setIsTextAreaFocused(true);
+            }}
+            onBlur={() => {
+              setIsTextAreaFocused(false);
+            }}
           />
           <Button
             marginTop="1em"
             onClick={() => {
-              toggleShowPrompt(!showPrompt);
+              toggleShowAnswer(!showAnswer);
             }}
           >
             Show Answer
@@ -82,13 +92,14 @@ export const Flashcard = ({
             onClick={() => {
               toggleShowAnswer(false);
               setTimeout(() => {
-                const text = textAreaRef.current;
+                const text = document.querySelector('.flascard-textarea');
                 text.focus();
+                text.value = userAnswer;
                 text.setSelectionRange(text.value.length, text.value.length);
               }, 10);
             }}
           >
-              Try Typing the Answer
+            Try Typing the Answer
           </Button>
         </>
       )}
