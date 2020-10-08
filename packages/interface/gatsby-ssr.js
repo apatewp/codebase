@@ -26,39 +26,15 @@ export const onRenderBody = ({
   setPreBodyComponents([<ColorModeScript key="chakra-ui-no-flash" />]);
   if (
     process.env.NODE_ENV == 'development' ||
-    process.env.GATSBY_ACTIVE_ENV == 'development'
+    process.env.GATSBY_ACTIVE_ENV == 'development' ||
+    process.env.GATSBY_ACTIVE_ENV == 'staging'
   ) {
-    return;
-  }
-  if (process.env.GATSBY_ACTIVE_ENV == 'staging') {
-    setPostBodyComponents([
-      <script
-        src="https://cdn.lr-ingest.io/LogRocket.min.js"
-        key="logrocket-cdn"
-        crossOrigin="anonymous"
-      />,
-      /* eslint-disable */
-      <script key="logrocket-init">
-        window.LogRocket && window.LogRocket.init('4qbrpw/staging');
-      </script>,
-      /* eslint-enable */
-    ]);
     return;
   }
 
   const zendeskKey = '81e26970-baa7-4b83-a913-984711a0b5f1';
 
   setPostBodyComponents([
-    <script
-      src="https://cdn.lr-ingest.io/LogRocket.min.js"
-      key="logrocket-cdn"
-      crossOrigin="anonymous"
-    />,
-    /* eslint-disable */
-    <script key="logrocket-init">
-      window.LogRocket && window.LogRocket.init('4qbrpw/production-hoje7');
-    </script>,
-    /* eslint-enable */
     <script
       id="ze-snippet"
       key="zendesk"
