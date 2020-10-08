@@ -7,5 +7,5 @@ export const wrapPageElement = ({ element, props }) => {
 };
 
 export const onClientEntry = () => {
-  LogRocket.init(process.env.GATSBY_LOGROCKET_CREDENTIALS);
+  LogRocket.init('4qbrpw/production-hoje7');
 };
