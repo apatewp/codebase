@@ -21,7 +21,7 @@ resource "google_container_cluster" "primary" {
     password = random_password.password.result
 
     client_certificate_config {
-      issue_client_certificate = false
+      issue_client_certificate = true
     }
   }
 

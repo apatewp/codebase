@@ -3,16 +3,6 @@ output "gke_host" {
   sensitive = true
 }
 
-output "gke_username" {
-  value     = module.kubernetes_cluster.master_username
-  sensitive = true
-}
-
-output "gke_password" {
-  value     = module.kubernetes_cluster.master_password
-  sensitive = true
-}
-
 output "gke_client_certificate" {
   value     = module.kubernetes_cluster.client_certificate
   sensitive = true
@@ -47,4 +37,14 @@ output "zone" {
 
 output "gcp_credentials" {
   value = var.gcp_credentials
+}
+
+output "gke_username" {
+  value     = module.kubernetes_cluster.master_username
+  sensitive = true
+}
+
+output "gke_password" {
+  value     = module.kubernetes_cluster.master_password
+  sensitive = true
 }

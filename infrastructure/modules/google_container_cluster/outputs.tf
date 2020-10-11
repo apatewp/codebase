@@ -18,6 +18,10 @@ output "host" {
   sensitive = true
 }
 
+output "instance_group_urls" {
+  value = google_container_cluster.primary.instance_group_urls
+}
+
 output "master_username" {
   value     = google_container_cluster.primary.master_auth.0.username
   sensitive = true
@@ -26,8 +30,4 @@ output "master_username" {
 output "master_password" {
   value     = google_container_cluster.primary.master_auth.0.password
   sensitive = true
-}
-
-output "instance_group_urls" {
-  value = google_container_cluster.primary.instance_group_urls
 }

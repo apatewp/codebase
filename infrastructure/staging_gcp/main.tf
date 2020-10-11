@@ -22,6 +22,10 @@ module "networking_service_connection" {
   project_id = var.project_id
 }
 
+module "egress_routing" {
+  source = "../modules/egress_routing"
+}
+
 module "postgres" {
   source        = "../modules/postgres"
   zone          = var.zone

@@ -10,6 +10,22 @@ data "terraform_remote_state" "staging_gcp" {
   }
 }
 
+provider "google" {
+  project = data.terraform_remote_state.staging_gcp.outputs.project_id
+  region  = data.terraform_remote_state.staging_gcp.outputs.region
+  zone    = data.terraform_remote_state.staging_gcp.outputs.zone
+
+  credentials = data.terraform_remote_state.staging_gcp.outputs.gcp_credentials
+}
+
+provider "google-beta" {
+  project = data.terraform_remote_state.staging_gcp.outputs.project_id
+  region  = data.terraform_remote_state.staging_gcp.outputs.region
+  zone    = data.terraform_remote_state.staging_gcp.outputs.zone
+
+  credentials = data.terraform_remote_state.staging_gcp.outputs.gcp_credentials
+}
+
 provider "kubernetes" {
   load_config_file = false
 
@@ -24,15 +40,12 @@ provider "kubernetes" {
 
 provider "kubernetes-alpha" {
   server_side_planning = true
-  token                = data.terraform_remote_state.production_gcp.outputs.gcp_credentials
 
-  host     = data.terraform_remote_state.production_gcp.outputs.gke_host
-  username = data.terraform_remote_state.production_gcp.outputs.gke_username
-  password = data.terraform_remote_state.production_gcp.outputs.gke_password
+  host     = "https://${data.terraform_remote_state.staging_gcp.outputs.gke_host}"
 
-  client_certificate     = base64decode(data.terraform_remote_state.production_gcp.outputs.gke_client_certificate)
-  client_key             = base64decode(data.terraform_remote_state.production_gcp.outputs.gke_client_key)
-  cluster_ca_certificate = base64decode(data.terraform_remote_state.production_gcp.outputs.gke_cluster_ca_certificate)
+  client_certificate     = base64decode(data.terraform_remote_state.staging_gcp.outputs.gke_client_certificate)
+  client_key             = base64decode(data.terraform_remote_state.staging_gcp.outputs.gke_client_key)
+  cluster_ca_certificate = base64decode(data.terraform_remote_state.staging_gcp.outputs.gke_cluster_ca_certificate)
 }
 
 module "sql_proxy_kubernetes_secret" {

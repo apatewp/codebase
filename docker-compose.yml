@@ -8,6 +8,7 @@ x-environment-variables: &environment-variables
   - DATABASE_URL=postgres://postgres:password@postgres:5432/neon_law
   - SHADOW_DATABASE_URL=postgres://postgres:password@postgres:5432/neon_law_shadow
   - ROOT_DATABASE_URL=postgres://postgres:password@postgres:5432/postgres
+  - ELASTICSEARCH_URL=http://elastic:changeme@elasticsearch:9200
   - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
   - NODE_ENV=development
   - SHOW_GRAPHIQL=true
@@ -36,6 +37,13 @@ services:
     volumes:
       - ./docker/pg-init-scripts:/docker-entrypoint-initdb.d
     command: ["postgres", "-c", "log_statement=all"]
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+    environment:
+      - "discovery.type=single-node"
+    ports:
+      - 9200:9200
 
   api:
     build:
