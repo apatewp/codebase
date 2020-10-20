@@ -108,6 +108,6 @@ module "delete_your_data_deployment" {
   image_url = "${data.terraform_remote_state.production_gcp.outputs.container_registry}/delete-your-data:latest"
 }
 
-# module "ingress" {
-#   source = "../modules/production_ingress"
-# }
+module "ingress" {
+  source = "../modules/production_ingress"
+}
