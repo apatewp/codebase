@@ -33,14 +33,14 @@ const uploadPlugin = makeExtendSchemaPlugin(() => ({
 
 export const postgraphileOptions: PostGraphileOptions = {
   async additionalGraphQLContextFromRequest(request) {
-    if (!request.neonLawPerson || !request.neonLawPerson.id) {
-      return {};
+    if (request.authenticatedPerson && request.authenticatedPerson.id) {
+      const { id, role } = request.authenticatedPerson;
+      return {
+        authenticatedPerson: { id, role },
+      };
     }
 
-    const { id, role } = request.neonLawPerson;
-    return {
-      neonLawPerson: { id, role }
-    };
+    return {};
   },
   appendPlugins: [uploadPlugin],
   disableQueryLog: false,
@@ -59,12 +59,13 @@ export const postgraphileOptions: PostGraphileOptions = {
     const settings: any = {};
 
     if (request.user) {
-      const { role, id } = request.neonLawPerson;
+      const { role, id } = request.authenticatedPerson;
       settings['role'] = role;
       settings['person.id'] = id;
     } else {
       settings['role'] = 'anonymous';
     }
+    settings['application_name'] = request['X-Trace-Id'];
 
     return settings;
   },
