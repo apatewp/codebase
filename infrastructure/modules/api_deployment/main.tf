@@ -102,7 +102,7 @@ resource "kubernetes_deployment" "api" {
           }
 
           volume_mount {
-            name       = var.sql_proxy_secret_name
+            name       = var.logic_secret_name
             read_only  = true
             mount_path = "/credentials/"
           }
