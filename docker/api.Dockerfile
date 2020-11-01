@@ -7,6 +7,14 @@ ENV SHOW_GRAPHIQL $SHOW_GRAPHIQL
 
 WORKDIR /app
 
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install \
+  --silent \
+  --ignore-optional \
+  --prefer-offline \
+  --cache-folder ./node_modules
+
 COPY . ./
 
 EXPOSE 3000
