@@ -71,6 +71,11 @@
       "placeholder": "Enter your name",
       "required": "Name is required."
     },
+    "questionType": {
+      "label": "Question Type",
+      "placeholder": "Enter the question type",
+      "required": "Question Type is required."
+    },
     "prompt": {
       "label": "Prompt",
       "placeholder": "Enter the prompt",
@@ -96,8 +101,7 @@
     "send": "Send Message"
   },
   "pages_admin": {
-    "heading": "Admin Portal",
-    "text": "Choose an Option on your Left."
+    "heading": "Admin Portal"
   },
   "pages_lawyers": {
     "settings": "Lawyer Firm Settings",
