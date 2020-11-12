@@ -5,8 +5,8 @@ import { Box, Heading, Text } from '@chakra-ui/core';
 import { colors, gutters, sizes } from '@neonlaw/shared-ui/src/themes/neonLaw';
 
 import BannerBg from '../../images/banner.jpg';
+import { Button } from '@neonlaw/shared-ui/src/components/button';
 import { Container } from '@neonlaw/shared-ui/src/components/container';
-import { FlashButton } from '@neonlaw/shared-ui/src/components/button';
 import React from 'react';
 import { navigate } from 'gatsby';
 import { theme } from '@chakra-ui/core';
@@ -52,7 +52,8 @@ export const Banner = ({ title, text, buttonText }: BannerProps) => (
         >
           {text}
         </Text>
-        <FlashButton
+        <Button
+          flash={true}
           bg={colors.cyanDark}
           _hover={{ bg: colors.cyanDark1 }}
           onClick={() => {
@@ -60,7 +61,7 @@ export const Banner = ({ title, text, buttonText }: BannerProps) => (
           }}
         >
           {buttonText}
-        </FlashButton>
+        </Button>
       </Box>
     </Container>
   </Box>
