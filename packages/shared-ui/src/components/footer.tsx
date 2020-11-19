@@ -19,6 +19,7 @@ import { Link } from './link';
 import React from 'react';
 import { Section } from './section';
 import { SocialMediaIcons } from './socialMediaIcons';
+import { ThemeSwitcher } from './theme-switcher';
 import { useIntl } from 'gatsby-plugin-intl';
 
 const FooterLink = ({ currentSite, site, path, i18nMessage }) => {
@@ -58,7 +59,7 @@ interface FooterProps {
 }
 
 export const Footer = ({ isWhite, currentSite, fathomLink }: FooterProps) => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const color = { dark: 'white', light: 'black' };
   const intl = useIntl();
 
@@ -88,15 +89,6 @@ export const Footer = ({ isWhite, currentSite, fathomLink }: FooterProps) => {
           >
             <Flex direction="column">
               <LanguageDropdown />
-              <Text onClick={toggleColorMode} cursor="pointer" padding="7px 0">
-                {intl.formatMessage({ id: 'footer.switch' })}
-                {`${
-                  colorMode === 'dark'
-                    ? intl.formatMessage({ id: 'footer.light' })
-                    : intl.formatMessage({ id: 'footer.dark' })
-                }`}
-                {intl.formatMessage({ id: 'footer.mode' })}
-              </Text>
               <Box
                 as="a"
                 href="https://neonlaw.zendesk.com/"
@@ -193,6 +185,7 @@ export const Footer = ({ isWhite, currentSite, fathomLink }: FooterProps) => {
             <Box display={['none', 'none', 'flex']} />
           </Flex>
           <Box paddingBottom="1em">
+            <ThemeSwitcher />
             <Text textAlign="center">
               Copyright &copy; {new Date().getFullYear()} Shook Law PLLC
             </Text>
