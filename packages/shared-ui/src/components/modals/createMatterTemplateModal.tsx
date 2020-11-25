@@ -11,24 +11,23 @@ import {
   useColorMode,
 } from '@chakra-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { Select, StringInput } from '../inputs';
 import { colors, gutters } from '../../themes/neonLaw';
 import { submitOnMetaEnter, submitOnShiftEnter } from '../../utils/keyboard';
-
 import { FlashButton } from '../button';
+import { StringInput } from '../inputs';
 import { SubmissionInProgress } from '../submission-in-progress';
-import { useCreateQuestionMutation } from '../../utils/api';
+import { useCreateMatterTemplateMutation } from '../../utils/api';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'gatsby-plugin-intl';
 import { useKeyPressed } from '../../utils/useKeyPressed';
 import { useOS } from '../../utils/useOS';
 
-export const CreateQuestionModal = ({ isOpen, onClose, onOpen }) => {
+export const CreateMatterTemplateModal = ({ isOpen, onClose, onOpen }) => {
   const intl = useIntl();
 
-  const [createQuestion, { loading }] = useCreateQuestionMutation();
+  const [createMatterTemplate, { loading }] = useCreateMatterTemplateMutation();
 
-  const { control, handleSubmit, errors, register, reset } = useForm();
+  const { handleSubmit, errors, register, reset } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
@@ -36,12 +35,11 @@ export const CreateQuestionModal = ({ isOpen, onClose, onOpen }) => {
   const OS = useOS();
   const isCPressed = useKeyPressed((e: KeyboardEvent) => e.key === 'c');
 
-  const onSubmit = async ({ options, prompt, questionType }) => {
-    await createQuestion({
+  const onSubmit = async ({ name, javascriptModule }) => {
+    await createMatterTemplate({
       variables: {
-        options,
-        prompt,
-        questionType: questionType.value
+        javascriptModule,
+        name,
       }
     })
       .then(async () => {
@@ -90,7 +88,7 @@ export const CreateQuestionModal = ({ isOpen, onClose, onOpen }) => {
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay>
         <ModalContent
-          data-testid="create-question-modal"
+          data-testid="create-matter-template-modal"
           margin="8em 2em 0 2em"
         >
           <ModalHeader
@@ -98,10 +96,11 @@ export const CreateQuestionModal = ({ isOpen, onClose, onOpen }) => {
             fontSize={theme.fontSizes['xl0']}
             color={colors.text[colorMode]}
           >
-            Create a Question
+            Create a Matter Template
           </ModalHeader>
           <ModalCloseButton style={{ color: colors.text[colorMode] }} />
           <form
+            data-testid="create-matter-template-form"
             onSubmit={handleSubmit(onSubmit as any)}
             style={{ color: colors.text[colorMode] }}
             ref={formRef}
@@ -109,49 +108,49 @@ export const CreateQuestionModal = ({ isOpen, onClose, onOpen }) => {
             <ModalBody>
               {formError}
               <StringInput
-                name="prompt"
-                testId="create-question-form-prompt"
-                label={intl.formatMessage({ id: 'forms.prompt.label' })}
+                name="name"
+                testId="create-matter-template-form-name"
+                label={intl.formatMessage({ id: 'forms.name.label' })}
                 errors={errors}
                 placeholder={intl.formatMessage({
-                  id: 'forms.prompt.placeholder',
+                  id: 'forms.name.placeholder',
                 })}
                 register={register({
                   required: intl.formatMessage({
-                    id: 'forms.prompt.required',
+                    id: 'forms.name.required',
                   }),
                 })}
                 styles={{ marginBottom: gutters.xSmall }}
               />
-              <Select
-                name="questionType"
-                label={intl.formatMessage({ id: 'forms.questionType.label' })}
-                options={
-                  [
-                    { label: 'Single Choice', value: 'single-choice' },
-                    { label: 'Single Date', value: 'single-date' },
-                    {
-                      label: 'Single File Upload',
-                      value: 'single-file-upload'
-                    },
-                  ]
+              <StringInput
+                name="javascriptModule"
+                testId="create-matter-template-form-javascript-module"
+                label={
+                  intl.formatMessage({ id: 'forms.javascript_module.label' })
                 }
                 errors={errors}
-                testId="create-question-form-question-type"
-                control={control}
+                placeholder={intl.formatMessage({
+                  id: 'forms.javascript_module.placeholder',
+                })}
+                register={register({
+                  required: intl.formatMessage({
+                    id: 'forms.javascript_module.required',
+                  }),
+                })}
+                styles={{ marginBottom: gutters.xSmall }}
               />
             </ModalBody>
 
             <ModalFooter>
               <FlashButton
                 type="submit"
-                data-testid="create-question-form-submit"
+                data-testid="create-matter-template-form-submit"
                 isDisabled={isSubmitting || loading}
                 containerStyles={{width: '100%'}}
                 styles={{width: '100%'}}
                 colorScheme="teal"
               >
-                Create Question &nbsp;
+                Create MatterTemplate &nbsp;
                 <Kbd border="1px solid #bbb" color="black">
                   Shift
                 </Kbd>
