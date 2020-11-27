@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client';
-import * as React from 'react';
 import * as Apollo from '@apollo/client';
-import * as ApolloReactComponents from '@apollo/client/react/components';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -5034,12 +5033,6 @@ export const AllDocumentTemplatesDocument = gql`
   }
 }
     `;
-export type AllDocumentTemplatesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AllDocumentTemplatesQuery, AllDocumentTemplatesQueryVariables>, 'query'>;
-
-    export const AllDocumentTemplatesComponent = (props: AllDocumentTemplatesComponentProps) => (
-      <ApolloReactComponents.Query<AllDocumentTemplatesQuery, AllDocumentTemplatesQueryVariables> query={AllDocumentTemplatesDocument} {...props} />
-    );
-    
 
 /**
  * __useAllDocumentTemplatesQuery__
@@ -5076,12 +5069,6 @@ export const AllFlashcardsDocument = gql`
   }
 }
     `;
-export type AllFlashcardsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AllFlashcardsQuery, AllFlashcardsQueryVariables>, 'query'>;
-
-    export const AllFlashcardsComponent = (props: AllFlashcardsComponentProps) => (
-      <ApolloReactComponents.Query<AllFlashcardsQuery, AllFlashcardsQueryVariables> query={AllFlashcardsDocument} {...props} />
-    );
-    
 
 /**
  * __useAllFlashcardsQuery__
@@ -5118,12 +5105,6 @@ export const AllMatterTemplatesDocument = gql`
   }
 }
     `;
-export type AllMatterTemplatesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AllMatterTemplatesQuery, AllMatterTemplatesQueryVariables>, 'query'>;
-
-    export const AllMatterTemplatesComponent = (props: AllMatterTemplatesComponentProps) => (
-      <ApolloReactComponents.Query<AllMatterTemplatesQuery, AllMatterTemplatesQueryVariables> query={AllMatterTemplatesDocument} {...props} />
-    );
-    
 
 /**
  * __useAllMatterTemplatesQuery__
@@ -5160,12 +5141,6 @@ export const AllPeopleDocument = gql`
   }
 }
     `;
-export type AllPeopleComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AllPeopleQuery, AllPeopleQueryVariables>, 'query'>;
-
-    export const AllPeopleComponent = (props: AllPeopleComponentProps) => (
-      <ApolloReactComponents.Query<AllPeopleQuery, AllPeopleQueryVariables> query={AllPeopleDocument} {...props} />
-    );
-    
 
 /**
  * __useAllPeopleQuery__
@@ -5203,12 +5178,6 @@ export const AllQuestionsDocument = gql`
   }
 }
     `;
-export type AllQuestionsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AllQuestionsQuery, AllQuestionsQueryVariables>, 'query'>;
-
-    export const AllQuestionsComponent = (props: AllQuestionsComponentProps) => (
-      <ApolloReactComponents.Query<AllQuestionsQuery, AllQuestionsQueryVariables> query={AllQuestionsDocument} {...props} />
-    );
-    
 
 /**
  * __useAllQuestionsQuery__
@@ -5246,12 +5215,6 @@ export const CreateDocumentTemplateDocument = gql`
 }
     `;
 export type CreateDocumentTemplateMutationFn = Apollo.MutationFunction<CreateDocumentTemplateMutation, CreateDocumentTemplateMutationVariables>;
-export type CreateDocumentTemplateComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<CreateDocumentTemplateMutation, CreateDocumentTemplateMutationVariables>, 'mutation'>;
-
-    export const CreateDocumentTemplateComponent = (props: CreateDocumentTemplateComponentProps) => (
-      <ApolloReactComponents.Mutation<CreateDocumentTemplateMutation, CreateDocumentTemplateMutationVariables> mutation={CreateDocumentTemplateDocument} {...props} />
-    );
-    
 
 /**
  * __useCreateDocumentTemplateMutation__
@@ -5291,12 +5254,6 @@ export const CreateFlashcardDocument = gql`
 }
     `;
 export type CreateFlashcardMutationFn = Apollo.MutationFunction<CreateFlashcardMutation, CreateFlashcardMutationVariables>;
-export type CreateFlashcardComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<CreateFlashcardMutation, CreateFlashcardMutationVariables>, 'mutation'>;
-
-    export const CreateFlashcardComponent = (props: CreateFlashcardComponentProps) => (
-      <ApolloReactComponents.Mutation<CreateFlashcardMutation, CreateFlashcardMutationVariables> mutation={CreateFlashcardDocument} {...props} />
-    );
-    
 
 /**
  * __useCreateFlashcardMutation__
@@ -5334,12 +5291,6 @@ export const CreateMatterTemplateDocument = gql`
 }
     `;
 export type CreateMatterTemplateMutationFn = Apollo.MutationFunction<CreateMatterTemplateMutation, CreateMatterTemplateMutationVariables>;
-export type CreateMatterTemplateComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<CreateMatterTemplateMutation, CreateMatterTemplateMutationVariables>, 'mutation'>;
-
-    export const CreateMatterTemplateComponent = (props: CreateMatterTemplateComponentProps) => (
-      <ApolloReactComponents.Mutation<CreateMatterTemplateMutation, CreateMatterTemplateMutationVariables> mutation={CreateMatterTemplateDocument} {...props} />
-    );
-    
 
 /**
  * __useCreateMatterTemplateMutation__
@@ -5378,12 +5329,6 @@ export const CreateQuestionDocument = gql`
 }
     `;
 export type CreateQuestionMutationFn = Apollo.MutationFunction<CreateQuestionMutation, CreateQuestionMutationVariables>;
-export type CreateQuestionComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<CreateQuestionMutation, CreateQuestionMutationVariables>, 'mutation'>;
-
-    export const CreateQuestionComponent = (props: CreateQuestionComponentProps) => (
-      <ApolloReactComponents.Mutation<CreateQuestionMutation, CreateQuestionMutationVariables> mutation={CreateQuestionDocument} {...props} />
-    );
-    
 
 /**
  * __useCreateQuestionMutation__
@@ -5422,12 +5367,6 @@ export const CurrentUserDocument = gql`
   }
 }
     `;
-export type CurrentUserComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<CurrentUserQuery, CurrentUserQueryVariables>, 'query'>;
-
-    export const CurrentUserComponent = (props: CurrentUserComponentProps) => (
-      <ApolloReactComponents.Query<CurrentUserQuery, CurrentUserQueryVariables> query={CurrentUserDocument} {...props} />
-    );
-    
 
 /**
  * __useCurrentUserQuery__
@@ -5463,12 +5402,6 @@ export const DeleteDocumentTemplateByIdDocument = gql`
 }
     `;
 export type DeleteDocumentTemplateByIdMutationFn = Apollo.MutationFunction<DeleteDocumentTemplateByIdMutation, DeleteDocumentTemplateByIdMutationVariables>;
-export type DeleteDocumentTemplateByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<DeleteDocumentTemplateByIdMutation, DeleteDocumentTemplateByIdMutationVariables>, 'mutation'>;
-
-    export const DeleteDocumentTemplateByIdComponent = (props: DeleteDocumentTemplateByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<DeleteDocumentTemplateByIdMutation, DeleteDocumentTemplateByIdMutationVariables> mutation={DeleteDocumentTemplateByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useDeleteDocumentTemplateByIdMutation__
@@ -5503,12 +5436,6 @@ export const DeleteFlashcardByIdDocument = gql`
 }
     `;
 export type DeleteFlashcardByIdMutationFn = Apollo.MutationFunction<DeleteFlashcardByIdMutation, DeleteFlashcardByIdMutationVariables>;
-export type DeleteFlashcardByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<DeleteFlashcardByIdMutation, DeleteFlashcardByIdMutationVariables>, 'mutation'>;
-
-    export const DeleteFlashcardByIdComponent = (props: DeleteFlashcardByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<DeleteFlashcardByIdMutation, DeleteFlashcardByIdMutationVariables> mutation={DeleteFlashcardByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useDeleteFlashcardByIdMutation__
@@ -5543,12 +5470,6 @@ export const DeleteMatterTemplateByIdDocument = gql`
 }
     `;
 export type DeleteMatterTemplateByIdMutationFn = Apollo.MutationFunction<DeleteMatterTemplateByIdMutation, DeleteMatterTemplateByIdMutationVariables>;
-export type DeleteMatterTemplateByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<DeleteMatterTemplateByIdMutation, DeleteMatterTemplateByIdMutationVariables>, 'mutation'>;
-
-    export const DeleteMatterTemplateByIdComponent = (props: DeleteMatterTemplateByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<DeleteMatterTemplateByIdMutation, DeleteMatterTemplateByIdMutationVariables> mutation={DeleteMatterTemplateByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useDeleteMatterTemplateByIdMutation__
@@ -5583,12 +5504,6 @@ export const DeleteQuestionByIdDocument = gql`
 }
     `;
 export type DeleteQuestionByIdMutationFn = Apollo.MutationFunction<DeleteQuestionByIdMutation, DeleteQuestionByIdMutationVariables>;
-export type DeleteQuestionByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<DeleteQuestionByIdMutation, DeleteQuestionByIdMutationVariables>, 'mutation'>;
-
-    export const DeleteQuestionByIdComponent = (props: DeleteQuestionByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<DeleteQuestionByIdMutation, DeleteQuestionByIdMutationVariables> mutation={DeleteQuestionByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useDeleteQuestionByIdMutation__
@@ -5622,12 +5537,6 @@ export const GetTransloaditTokenDocument = gql`
 }
     `;
 export type GetTransloaditTokenMutationFn = Apollo.MutationFunction<GetTransloaditTokenMutation, GetTransloaditTokenMutationVariables>;
-export type GetTransloaditTokenComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<GetTransloaditTokenMutation, GetTransloaditTokenMutationVariables>, 'mutation'>;
-
-    export const GetTransloaditTokenComponent = (props: GetTransloaditTokenComponentProps) => (
-      <ApolloReactComponents.Mutation<GetTransloaditTokenMutation, GetTransloaditTokenMutationVariables> mutation={GetTransloaditTokenDocument} {...props} />
-    );
-    
 
 /**
  * __useGetTransloaditTokenMutation__
@@ -5664,12 +5573,6 @@ export const UpdateDocumentTemplateByIdDocument = gql`
 }
     `;
 export type UpdateDocumentTemplateByIdMutationFn = Apollo.MutationFunction<UpdateDocumentTemplateByIdMutation, UpdateDocumentTemplateByIdMutationVariables>;
-export type UpdateDocumentTemplateByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<UpdateDocumentTemplateByIdMutation, UpdateDocumentTemplateByIdMutationVariables>, 'mutation'>;
-
-    export const UpdateDocumentTemplateByIdComponent = (props: UpdateDocumentTemplateByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<UpdateDocumentTemplateByIdMutation, UpdateDocumentTemplateByIdMutationVariables> mutation={UpdateDocumentTemplateByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useUpdateDocumentTemplateByIdMutation__
@@ -5708,12 +5611,6 @@ export const UpdateFlashcardByIdDocument = gql`
 }
     `;
 export type UpdateFlashcardByIdMutationFn = Apollo.MutationFunction<UpdateFlashcardByIdMutation, UpdateFlashcardByIdMutationVariables>;
-export type UpdateFlashcardByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<UpdateFlashcardByIdMutation, UpdateFlashcardByIdMutationVariables>, 'mutation'>;
-
-    export const UpdateFlashcardByIdComponent = (props: UpdateFlashcardByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<UpdateFlashcardByIdMutation, UpdateFlashcardByIdMutationVariables> mutation={UpdateFlashcardByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useUpdateFlashcardByIdMutation__
@@ -5752,12 +5649,6 @@ export const UpdateMatterTemplateByIdDocument = gql`
 }
     `;
 export type UpdateMatterTemplateByIdMutationFn = Apollo.MutationFunction<UpdateMatterTemplateByIdMutation, UpdateMatterTemplateByIdMutationVariables>;
-export type UpdateMatterTemplateByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<UpdateMatterTemplateByIdMutation, UpdateMatterTemplateByIdMutationVariables>, 'mutation'>;
-
-    export const UpdateMatterTemplateByIdComponent = (props: UpdateMatterTemplateByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<UpdateMatterTemplateByIdMutation, UpdateMatterTemplateByIdMutationVariables> mutation={UpdateMatterTemplateByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useUpdateMatterTemplateByIdMutation__
@@ -5796,12 +5687,6 @@ export const UpdatePersonByIdDocument = gql`
 }
     `;
 export type UpdatePersonByIdMutationFn = Apollo.MutationFunction<UpdatePersonByIdMutation, UpdatePersonByIdMutationVariables>;
-export type UpdatePersonByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<UpdatePersonByIdMutation, UpdatePersonByIdMutationVariables>, 'mutation'>;
-
-    export const UpdatePersonByIdComponent = (props: UpdatePersonByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<UpdatePersonByIdMutation, UpdatePersonByIdMutationVariables> mutation={UpdatePersonByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useUpdatePersonByIdMutation__
@@ -5841,12 +5726,6 @@ export const UpdateQuestionByIdDocument = gql`
 }
     `;
 export type UpdateQuestionByIdMutationFn = Apollo.MutationFunction<UpdateQuestionByIdMutation, UpdateQuestionByIdMutationVariables>;
-export type UpdateQuestionByIdComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<UpdateQuestionByIdMutation, UpdateQuestionByIdMutationVariables>, 'mutation'>;
-
-    export const UpdateQuestionByIdComponent = (props: UpdateQuestionByIdComponentProps) => (
-      <ApolloReactComponents.Mutation<UpdateQuestionByIdMutation, UpdateQuestionByIdMutationVariables> mutation={UpdateQuestionByIdDocument} {...props} />
-    );
-    
 
 /**
  * __useUpdateQuestionByIdMutation__
