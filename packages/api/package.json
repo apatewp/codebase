@@ -36,6 +36,6 @@
     "winston": "^3.3.3"
   },
   "resolutions": {
-    "graphql": "^15.4.0"
+    "graphql": "^14.0.1"
   }
 }
