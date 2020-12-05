@@ -24,7 +24,7 @@ module.exports = {
     },
     {
       options: {
-        prodKey: '6JnX0AiHCdCOVc9O4e0f9GM7M4nyH3Gg',
+        prodKey: 'g3YZhuTc2vremmKADQUySeqE55Zv0FYI',
         trackPage: true
       },
       resolve: 'gatsby-plugin-segment-js'
