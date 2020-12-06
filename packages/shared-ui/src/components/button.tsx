@@ -8,8 +8,6 @@ import {
 } from '@chakra-ui/core';
 import { Global, css, keyframes } from '@emotion/core';
 import { colors, gutters, shadows } from '../themes/neonLaw';
-
-import { Link } from './link';
 import React from 'react';
 import styled from '@emotion/styled';
 
@@ -41,7 +39,6 @@ export const ReadMoreButton = ({ children, ...props }: any) => {
   return (
     <Box
       {...props}
-      as={Link}
       borderBottom={`2px solid ${colors.primaryColor400}`}
       display="inline-block"
       marginTop={gutters.xSmall}

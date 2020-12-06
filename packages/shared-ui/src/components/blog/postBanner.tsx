@@ -4,10 +4,8 @@ import {
   gutters,
   shadows,
 } from '@neonlaw/shared-ui/src/themes/neonLaw';
-
 import { FormattedDate } from 'gatsby-plugin-intl';
-import { Image } from '../image';
-import { Link } from '@reach/router';
+import { Link } from 'gatsby';
 import React from 'react';
 import { ReadMoreButton } from '@neonlaw/shared-ui/src/components/button';
 import styled from '@emotion/styled';
@@ -47,17 +45,15 @@ export interface PostBannerProps {
   title: string;
   date: Date;
   excerpt: string;
-  featuredImage?: any;
-  widescreen?: string;
+  children: any;
 }
 
 export const PostBanner = ({
-  slug,
-  title,
+  children,
   date,
   excerpt,
-  featuredImage,
-  widescreen,
+  slug,
+  title,
 }: PostBannerProps): JSX.Element => {
   const { colorMode } = useColorMode();
   return (
@@ -66,15 +62,9 @@ export const PostBanner = ({
         backgroundColor: colors.background[colorMode],
         borderColor: colors.borders[colorMode],
       }}
-      to={slug || '/'}
+      to={slug}
     >
-      <div className="img">
-        <Image
-          aspectRatio={widescreen ? 2 : 16 / 9}
-          src={featuredImage ? featuredImage : 'blog-featured-placeholder.jpg'}
-          alt={title}
-        />
-      </div>
+      {children}
       <div className="text" style={{ borderColor: colors.borders[colorMode] }}>
         <Heading as="h3" fontWeight="400" marginBottom={gutters.xSmallOne}>
           {title}

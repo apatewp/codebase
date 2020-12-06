@@ -2,8 +2,8 @@ import { Box, Heading, List, ListItem } from '@chakra-ui/core';
 import { gutters, sizes } from '@neonlaw/shared-ui/src/themes/neonLaw';
 import { Container } from '@neonlaw/shared-ui/src/components/container';
 import { Image } from '../components/image';
+import { IndexLayout } from '../layouts/index';
 import { PostBanner } from '@neonlaw/shared-ui/src/components/blog/postBanner';
-import { PublicLayout } from '@neonlaw/shared-ui/src/layouts/publicLayout';
 import React from 'react';
 import { Seo } from '../components/seo';
 import { graphql } from 'gatsby';
@@ -21,15 +21,14 @@ const BlogIndex = ({ data }) => {
   const { edges } = data.allMdx;
 
   return (
-    <PublicLayout isBgLighter={true}>
+    <IndexLayout>
       <StyledBlog>
         <Seo title="Blog" />
         <Container>
           <Box padding="9rem 0 4rem">
             <Heading fontWeight="normal" marginBottom={gutters.small}>
-              Neon Law Blog
+              Delete Your Data Blog
             </Heading>
-
             <List spacing="0.5rem" maxWidth={sizes.textContainerMedium}>
               {edges.map(({ node: post }) => {
                 const { excerpt } = post;
@@ -67,7 +66,7 @@ const BlogIndex = ({ data }) => {
           </Box>
         </Container>
       </StyledBlog>
-    </PublicLayout>
+    </IndexLayout>
   );
 };
 
