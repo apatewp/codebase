@@ -1,11 +1,12 @@
 import React from 'react';
+import { gutters } from '@neonlaw/shared-ui/src/themes/neonLaw';
 import { links } from './links';
 import styled from '@emotion/styled';
 
 const StyledNav = styled.nav`
   display: flex;
   justify-content: flex-end;
-  padding: var(--gutter-normal) 0;
+  padding:  0;
 
   @media(max-width: 540px) {
     justify-content: center;
@@ -18,14 +19,14 @@ const StyledNav = styled.nav`
     z-index: 1 !important;
 
     &:not(:last-child) {
-      margin-right: var(--gutter-medium);
+      margin-right: ${gutters.medium};
 
       @media(max-width: 540px) {
-        margin-right: var(--gutter-normal);
+        margin-right: ;
       }
 
       @media(max-width: 320px) {
-        margin-right: var(--gutter-small);
+        margin-right: ${gutters.xSmall};
       }
     }
   }

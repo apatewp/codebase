@@ -63,15 +63,6 @@ export const BaseStyles = () => (
         overflow-x: hidden;
       }
 
-      .row {
-        max-width: var(--grid-max-width);
-        width: 90%;
-        margin: 0 auto;
-      }
-
-      section {
-        padding: 10rem 0;
-      }
 
       /* --------------------------------------- */
       /* ----- Headlines & Paragraphs ----- */

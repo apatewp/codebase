@@ -1,12 +1,13 @@
 import FAQs from '../components/index/faqs';
 import { Hero } from '../components/hero';
-import IndexLayout from '../layouts';
+import { IndexLayout } from '../layouts';
 import React from 'react';
 import { Seo } from '../components/seo';
 
 const HomePage = () => {
   const title = 'Homepage';
-  const description = 'Neon Law and its affiliates will find and ' +
+  const description =
+    'Neon Law and its affiliates will find and ' +
     'delete your data on the Internet.';
 
   return (
