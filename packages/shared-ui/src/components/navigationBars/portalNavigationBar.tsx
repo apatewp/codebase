@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-/* eslint-enable */
 import {
   Box,
   Button,
@@ -9,7 +6,6 @@ import {
   DrawerContent,
   DrawerOverlay,
   Flex,
-  IconButton,
   Menu,
   MenuButton,
   MenuItem,
@@ -21,11 +17,9 @@ import { colors, gutters } from '../../themes/neonLaw';
 
 import { AuthenticatedDropdown } from './authenticatedDropdown';
 import { AuthenticationContext } from '../../utils/authenticationContext';
-import { BlackLivesMatter } from './black-lives-matter';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Container } from '../container';
-import { Link } from '../../components/link';
-import { MdDehaze } from 'react-icons/md';
+import { Link } from '../link';
 import { Search } from './search';
 import { ThemeSwitcher } from '../theme-switcher';
 import { useIntl } from 'gatsby-plugin-intl';
@@ -37,53 +31,35 @@ interface BaseNavigationBarProps {
   sideNavigationDrawer?: any;
 }
 
-export const BaseNavigationBar = ({
+export const PortalNavigationBar = ({
   links = [] as any[],
   menus = [] as any[],
   sideNavigationDrawer,
-  isRenderedOnDashboard,
 }: BaseNavigationBarProps) => {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const intl = useIntl();
 
   const [loginButtonDisabled, disableLoginButton] = useState(false);
 
   return (
     <>
-      {!isRenderedOnDashboard ? <BlackLivesMatter /> : null}
       <Box
         top="2em"
-        position={`${!isRenderedOnDashboard ? 'fixed' : ''}`}
-        padding={`${
-          !isRenderedOnDashboard ? 0 : `${gutters.xSmallOne} ${gutters.xSmall}
-          `}`}
+        position='inherit'
+        padding={`${gutters.xSmallOne} ${gutters.xSmall}`}
         zIndex={4}
-        bg={!isRenderedOnDashboard ? 'black' : '#f4f4f4'}
-        color={!isRenderedOnDashboard ? 'white' : 'black'}
+        bg='#f4f4f4'
+        color='black'
         left="0"
         right="0"
         width="full"
-        height={!isRenderedOnDashboard ? '4em' : 'auto'}
+        height='auto'
       >
-        <Container isFullBleed={isRenderedOnDashboard}>
+        <Container isFullBleed={true}>
           <Flex boxSize="100%" align="center">
-            {!isRenderedOnDashboard ? (
-              <Box
-                mr={5}
-                as={Link}
-                cursor="pointer"
-                display="block"
-                to="/"
-                aria-label="Neon Law, Back to homepage"
-                minWidth="3em"
-              >
-                <img src="/images/logo.svg" alt="Neon Law" />
-              </Box>
-            ) : null}
-
             <Search
               version="desktop"
-              isRenderedOnDashboard={isRenderedOnDashboard}
+              isRenderedOnDashboard={true}
             />
 
             <Flex flexGrow={1} align="center" justify="flex-end">
@@ -114,7 +90,7 @@ export const BaseNavigationBar = ({
                         right: 0,
                       },
                       color: colors.primaryColor400,
-                    }}
+                    } as any}
                     activeClassName="nav-link--active"
                   >
                     {link.label}
@@ -138,10 +114,7 @@ export const BaseNavigationBar = ({
                 </Box>
               ))}
 
-              {
-                isRenderedOnDashboard ?
-                  <ThemeSwitcher isRenderedOnDashboard={true} /> : null
-              }
+              <ThemeSwitcher isRenderedOnDashboard={true} />
 
               <AuthenticationContext.Consumer>
                 {({ isLoading, isAuthenticated, login }) => {
@@ -170,24 +143,6 @@ export const BaseNavigationBar = ({
                   );
                 }}
               </AuthenticationContext.Consumer>
-              {!isRenderedOnDashboard ? (
-                <IconButton
-                  className="nav-content-mobile"
-                  aria-label="Navigation Menu"
-                  fontSize="20px"
-                  variant="ghost"
-                  color="black"
-                  icon={<MdDehaze />}
-                  textColor="white"
-                  onClick={() => {
-                    onToggle();
-                    document.body.setAttribute(
-                      'style',
-                      'margin-right: 0 !important',
-                    );
-                  }}
-                />
-              ) : null}
             </Flex>
           </Flex>
         </Container>

@@ -1,6 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-/* eslint-enable */
 import {
   Box,
   Menu,
@@ -15,7 +12,6 @@ import { Link } from '../../components/link';
 import React from 'react';
 import { UserAvatar } from '../userAvatar';
 import { navigate } from 'gatsby';
-import { useCurrentUserQuery } from '../../utils/api';
 import { useIntl } from 'gatsby-plugin-intl';
 
 export const AuthenticatedDropdown = () => {
@@ -23,9 +19,7 @@ export const AuthenticatedDropdown = () => {
   const lighterBg = { dark: 'gray.700', light: 'gray.200' };
   const evenLighterBg = { dark: 'gray.600', light: 'gray.100' };
   const color = { dark: 'white', light: 'black' };
-  const { data } = useCurrentUserQuery();
 
-  const role = data?.getCurrentUser?.role;
   const intl = useIntl();
 
   return (
@@ -47,24 +41,13 @@ export const AuthenticatedDropdown = () => {
           >
             {intl.formatMessage({ id: 'components_navbar.auth_portal' })}
           </MenuItem>
-          {(role == 'lawyer' || role == 'admin') && (
-            <MenuItem
-              as={Link}
-              onClick={() => navigate('/lawyers')}
-              _hover={{ backgroundColor: evenLighterBg[colorMode] }}
-            >
-              {intl.formatMessage({ id: 'components_navbar.auth_lawyers' })}
-            </MenuItem>
-          )}
-          {(role == 'admin') && (
-            <MenuItem
-              as={Link}
-              onClick={() => navigate('/admin')}
-              _hover={{ backgroundColor: evenLighterBg[colorMode] }}
-            >
-              {intl.formatMessage({ id: 'components_navbar.auth_admin' })}
-            </MenuItem>
-          )}
+          <MenuItem
+            as={Link}
+            onClick={() => navigate('/portal/settings')}
+            _hover={{ backgroundColor: evenLighterBg[colorMode] }}
+          >
+            {intl.formatMessage({ id: 'components_navbar.auth_settings' })}
+          </MenuItem>
           <AuthenticationContext.Consumer>
             {({ isLoading, logout }) => {
               if (isLoading) {
