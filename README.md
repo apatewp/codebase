@@ -10,11 +10,11 @@
 This is a monorepo containing these folders:
 
 - A Yarn Workspace, declared at `package.json` and with packages at
-  `./packages`, which contains the bulk of our code.
+  `./packages`, which contains our `interface` and `server` package.
 - A collection of Terraform modules located in the `./infrastructure` folder,
-  for building out our Cloud Computing.
+  for building out our Cloud Computing on GCP.
 - A collection of `Dockerfile`s and entrypoint scripts modules located in the
-  `./docker` folder, for building out our containers.
+  `./docker` folder, for building containers which run on GCP.
 
 ## Running Locally
 
@@ -73,7 +73,6 @@ This starts the following containers:
 - A shell container that you can use via `docker exec -it shell /bin/bash`
 - Web Servers for:
   - NeonLaw.com (http://127.0.0.1:8000)
-  - LawJobResources.com (http://127.0.0.1:5000)
   - DeleteYourData.com (http://127.0.0.1:6000)
   - The NeonLaw API (http://127.0.0.1:3000)
 
