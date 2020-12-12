@@ -2,7 +2,7 @@ import { Global, css } from '@emotion/core';
 
 import React from 'react';
 
-export const BaseStyles = () => (
+export const DeleteYourDataStyles = () => (
   <Global
     styles={css`
       /* --------------------------------------- */

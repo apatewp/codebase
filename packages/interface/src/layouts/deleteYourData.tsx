@@ -4,26 +4,23 @@ import {
   publicClient
 } from '@neonlaw/shared-ui/src/utils/authenticationContext';
 import { ApolloProvider } from '@apollo/client';
-import { BaseStyles } from '../styles/base';
+import { DeleteYourDataStyles } from '../styles/deleteYourData';
 import { Footer } from '@neonlaw/shared-ui/src/components/footer';
 import React from 'react';
 
-export const IndexLayout = ({ children }) => (
+export const DeleteYourDataLayout = ({ children }) => (
   <>
-    <BaseStyles />
+    <DeleteYourDataStyles />
     <AuthenticationContext.Consumer>
       {({ isLoading, apolloClient }) => {
         return (
           <ApolloProvider client={isLoading ? publicClient : apolloClient}>
             <>
               {children}
-              <Footer isWhite={false} currentSite="delete-your-data" />
+              <Footer isWhite={false} />
             </>
           </ApolloProvider>
         );}}
     </AuthenticationContext.Consumer>
   </>
 );
-
-/* eslint-disable-next-line import/no-default-export */
-export default IndexLayout;
