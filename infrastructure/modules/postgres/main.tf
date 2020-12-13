@@ -7,12 +7,11 @@ resource "google_sql_database_instance" "postgres" {
     tier = "db-f1-micro"
 
     ip_configuration {
-      ipv4_enabled    = var.environment == "production" ? true : false
+      ipv4_enabled    = true
       authorized_networks {
         name = "Segment Whitelisted IP"
         value = "52.25.130.38/32"
       }
-      require_ssl     = false
       private_network = "projects/${var.project_id}/global/networks/default"
     }
 
@@ -27,8 +26,8 @@ resource "random_string" "password" {
   special = false
 }
 
-resource "google_sql_user" "segment_user" {
-  name     = "segment"
+resource "google_sql_user" "neon_law_admin" {
+  name     = "neon_law_admin"
   instance = google_sql_database_instance.postgres.name
   password = random_string.password.result
 }

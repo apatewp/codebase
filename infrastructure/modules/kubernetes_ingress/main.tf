@@ -15,11 +15,11 @@ resource "kubernetes_ingress" "primary" {
     }
 
     rule {
-      host = "www.neonlaw.com"
+      host = var.environment == "production" ? "www.neonlaw.com" : "www.neonlaw.info"
       http {
         path {
           backend {
-            service_name = "production-api"
+            service_name = "api-${var.environment}"
             service_port = 80
           }
 
@@ -29,7 +29,7 @@ resource "kubernetes_ingress" "primary" {
     }
 
     rule {
-      host = "www.lawjobresources.com"
+      host = var.environment == "production" ? "www.lawjobresources.com" : "www.lawjobresources.info"
       http {
         path {
           backend {

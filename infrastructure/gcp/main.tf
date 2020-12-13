@@ -14,23 +14,16 @@ provider "google-beta" {
   credentials = var.gcp_credentials
 }
 
-provider "random" {
-}
-
 module "networking_service_connection" {
   source     = "../modules/networking_service_connection"
   project_id = var.project_id
 }
 
-module "egress_routing" {
-  source = "../modules/egress_routing"
-}
-
 module "postgres" {
-  source      = "../modules/postgres"
-  zone        = var.zone
-  region      = var.region
-  project_id  = var.project_id
+  source        = "../modules/postgres"
+  zone          = var.zone
+  region        = var.region
+  project_id    = var.project_id
   environment = var.environment
 }
 
@@ -41,52 +34,56 @@ module "container_registry" {
 }
 
 module "kubernetes_cluster" {
-  source     = "../modules/google_container_cluster"
-  region     = var.region
-  project_id = var.project_id
+  source      = "../modules/google_container_cluster"
+  region      = var.region
+  project_id  = var.project_id
+  environment = var.environment
 }
 
 module "neon-law-ssl-certificate" {
   source           = "../modules/ssl_certificate"
   certificate_name = "neon-law"
-  domain_name      = "www.neonlaw.net"
+  domain_name      = var.neon_law_url
 }
 
 module "law-job-resources-ssl-certificate" {
   source = "../modules/ssl_certificate"
   certificate_name = "law-job-resources"
-  domain_name      = "www.lawjobresources.net"
+  domain_name      = var.law_job_resources_url
 }
 
-module "public-bucket" {
+module "public_bucket" {
   source = "../modules/public_bucket"
   bucket_name = "${var.project_id}-public-assets"
   allowed_origins = [
-    "www.lawjobresources.com",
-    "www.neonlaw.com"
+    var.neon_law_url
   ]
 }
 
-module "upload-bucket" {
+module "upload_bucket" {
   source = "../modules/write_only_bucket"
   bucket_name = "${var.project_id}-unprocessed-uploads"
   allowed_origins = [
-    "www.neonlaw.net"
+    var.neon_law_url
   ]
 }
 
-module "user-bucket" {
+module "user_bucket" {
   source = "../modules/private_bucket"
   bucket_name = "${var.project_id}-private-assets"
   allowed_origins = [
-    "www.neonlaw.net"
+    var.neon_law_url
   ]
 }
 
-module "company-bucket" {
+module "company_bucket" {
   source = "../modules/private_bucket"
   bucket_name = "${var.project_id}-company-files"
   allowed_origins = [
-    "www.neonlaw.net"
+    var.neon_law_url
   ]
+}
+
+module "application_user" {
+  source     = "../modules/application_user"
 }

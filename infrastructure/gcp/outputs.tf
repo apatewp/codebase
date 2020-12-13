@@ -24,7 +24,7 @@ output "container_registry" {
 }
 
 output "project_id" {
-  value = "neon-law-staging"
+  value = "neon-law-production"
 }
 
 output "region" {
@@ -49,7 +49,26 @@ output "gke_password" {
   sensitive = true
 }
 
-output "segment_password" {
-  value = module.postgres.segment_password
+output "database_admin_password" {
+  value = module.postgres.admin_password
   sensitive = true
+}
+
+output "database_admin_username" {
+  value = module.postgres.admin_username
+  sensitive = true
+}
+
+output "upload_bucket_user_credentials" {
+  value = module.upload_bucket.gcp_credential_key
+  sensitive = true
+}
+
+output "application_user_account_key" {
+  value = module.application_user.account_key
+  sensitive = true
+}
+
+output "database_name" {
+  value = "neon-law"
 }
